@@ -1,10 +1,10 @@
-const authToken = import.meta.env.VITE_VIDEO_SDK_AUTH_TOKEN;
+export const authToken = import.meta.env.VITE_VIDEO_SDK_AUTH_TOKEN;
 
 export const createMeeting = async({token})=>{
     const res=await fetch("https://api.videosdk.live/v2/rooms",{
         method:"POST",
         headers:{
-            'Authorization': `${authToken}`,
+            'Authorization': `${import.meta.env.VITE_VIDEO_SDK_AUTH_TOKEN}`,
             'Content-Type': 'application/json',
         },
         body:JSON.stringify({})
@@ -12,5 +12,4 @@ export const createMeeting = async({token})=>{
     const {roomId}=await res.json();
     console.log("Room ID:",roomId);
     return roomId;
-        
 }
