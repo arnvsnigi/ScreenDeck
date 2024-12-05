@@ -26,6 +26,9 @@ Before you begin, ensure you have the following installed:
 - A modern web browser
 
 ## 📦 Installation
+$ npm install "@videosdk.live/react-sdk"
 
+//For the Participants Video
+$ npm install "react-player" 
 https://docs.videosdk.live/react/guide/video-and-audio-calling-api-sdk/quick-start
 
