@@ -3,7 +3,7 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import React, { useState } from 'react'
 import { MeetingProvider } from "@videosdk.live/react-sdk";
-import { authToken, createMeeting } from "./assets/API/api"
+import { authToken, createMeeting } from "./API/api"
 import MeetingView from './components/MeetingView';
 
 function JoinScreen(){
