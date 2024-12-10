@@ -37,7 +37,7 @@ function ParticipantView(props) {
       }
     }, [videoStream, webcamOn]);
 
-    //Creating a media stream from the screen share stream
+    //Cedia stream from the screen share stream
     const mediaStream = useMemo(() => {
       if (screenShareOn && screenShareStream) {
         const mediaStream = new MediaStream();

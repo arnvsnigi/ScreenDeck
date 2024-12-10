@@ -10,13 +10,17 @@ body {
 }
 
 .cosmic-bg {
-  background-image: url("assets/universe-bg.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background: linear-gradient(
+    135deg,
+    #0f1729 0%,
+    #1a1f35 25%,
+    #1f2341 50%,
+    #2a1f3d 75%,
+    #2d1a38 100%
+  );
   min-height: 100vh;
   position: relative;
+  z-index: 2;
 }
 
 .cosmic-bg::before {
@@ -26,6 +30,8 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 46, 106, 0.1), rgba(51, 153, 255, 0.1));
+  pointer-events: none;
 }
 
 .hero-title {

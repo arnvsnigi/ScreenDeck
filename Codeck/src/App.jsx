@@ -2,6 +2,7 @@ import './App.css'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import React, { useState } from 'react'
+import { Routes, Route, Outlet } from "react-router-dom";
 import { MeetingProvider } from "@videosdk.live/react-sdk";
 import { authToken, createMeeting } from "./API/api"
 import MeetingView from './components/MeetingView';
@@ -50,11 +51,21 @@ const App = () => {
     </MeetingProvider>
   ) : (
     <div className="cosmic-bg min-h-screen relative">
-      <div className="stars absolute inset-0 z-0"></div>
+     
+      <div className="stars absolute inset-0 z"></div>
       <div className="relative z-10">
+      
         <Navbar/>
-        <Hero getMeetingAndToken={getMeetingAndToken} />
+        <div className="pt-20"> 
+          <Routes>
+            <Route path="/" element={<Hero getMeetingAndToken={getMeetingAndToken} />} />
+          
+            <Route path="*" element={<Outlet />} />
+          </Routes>
+        </div>
+     
       </div>
+   
     </div>
   );
 }
