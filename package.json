@@ -1,0 +1,14 @@
+{
+  "name": "codeck",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "CoDeck Project",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js"
+  },
+  "dependencies": {
+    "mongoose": "^6.10.0",
+    "bcryptjs": "^2.4.3"
+  }
+}

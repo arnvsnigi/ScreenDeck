@@ -8,6 +8,7 @@ import Login from './components/Login.jsx'
 import Hero from './components/Hero'
 import ParticipantView from './components/ParticipantView'
 import MeetingView from './components/MeetingView'
+import AuthContextProvider from './store/AuthContextProvider.jsx';
 
 // Placeholder components for new routes
 const About = () => <div className="pt-20">About Page</div>
@@ -16,7 +17,8 @@ const Contact = () => <div className="pt-20">Contact Page</div>
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
+    <AuthContextProvider>
+      <BrowserRouter>
       <Routes>
         {/* <Route path="/" element={<App />} /> */}
           <Route path="/" element={<App />} />
@@ -29,8 +31,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="participant" element={<ParticipantView />} />
           <Route path="*" element={<div className="pt-20">404: Page Not Found</div>} />
       </Routes>
-      
-      
-    </BrowserRouter>
+      </BrowserRouter>
+    </AuthContextProvider>
   </StrictMode>,
 )

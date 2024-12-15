@@ -74,7 +74,7 @@ function MeetingView(props) {
               <div className="flex flex-col items-center space-y-4">
                 <h3 className="text-2xl font-bold">
                   <span className="bg-gradient-to-r from-[#ff2e6a] via-[#ff2ec4] to-[#3399ff] bg-clip-text text-transparent">
-                    Meeting Room
+                   {props.meetingTitle?props.meetingTitle:"Meeting Room"}
                   </span>
                 </h3>
                 
@@ -153,8 +153,8 @@ function MeetingView(props) {
                 
               </div>
              
-            
-               <Controls />
+            {/* ///////////////// user id as presenter id might not be a good idea */}
+               <Controls  meetingTitle={props.meetingTitle} meetingId={props.meetingId} participants={participants.size} elapsedTime={elapsedTime} />
               
             </div>
           ) : (

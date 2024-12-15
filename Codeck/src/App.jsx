@@ -25,6 +25,11 @@ function Container(props){
 
 const App = () => {
   const [meetingId, setMeetingId] = useState(null);
+  const [meetingTitle, setMeetingTitle] = useState("");
+
+  const meetingTitleHandler = (event) => {
+    setMeetingTitle(event.target.value);
+  }
 
   const getMeetingAndToken = async(id) => {
     const meetingId = id == null ? await createMeeting({token: authToken}) : id;
@@ -47,7 +52,7 @@ const App = () => {
       token={authToken}
       // reinitialiseMeetingOnConfigChange={true}
     >
-      <MeetingView meetingId={meetingId} onMeetingLeave={onMeetingLeave} />
+      <MeetingView meetingId={meetingId} onMeetingLeave={onMeetingLeave} meetingTitle={meetingTitle}/>
     </MeetingProvider>
   ) : (
     <div className="cosmic-bg min-h-screen relative">
@@ -58,7 +63,7 @@ const App = () => {
         <Navbar/>
         <div className="pt-20"> 
           <Routes>
-            <Route path="/" element={<Hero getMeetingAndToken={getMeetingAndToken} />} />
+            <Route path="/" element={<Hero getMeetingAndToken={getMeetingAndToken} meetingTitleHandler={meetingTitleHandler} meetingTitle={meetingTitle}/>} />
           
             <Route path="*" element={<Outlet />} />
           </Routes>

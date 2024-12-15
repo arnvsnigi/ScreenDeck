@@ -1,8 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { AuthContext } from '../store/AuthContextProvider';
+import { authService } from '../services/api';
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
+    const {isLoggedIn,LogoutHandler}=useContext(AuthContext);
+
+    const LogoutHandle=async(e)=>{
+        // e.preventDefault();
+        try{
+            await authService.logout();
+            console.log('Logout successful');
+            LogoutHandler();
+            navigate('/');
+        }catch(err){
+            console.log(err);
+        }
+
+    }
 
     useEffect(() => {
         const handleScroll = () => {
@@ -28,7 +44,7 @@ const Navbar = () => {
                     {/* Logo */}
                     <div className="flex items-center">
                         <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-[#ff2e6a] via-[#ff2ec4] to-[#3399ff] bg-clip-text text-transparent hover:scale-105 transition-transform">
-                            Aransh
+                            ScreenDeck
                         </Link>
                     </div>
 
@@ -62,6 +78,7 @@ const Navbar = () => {
                     </div>
 
                     {/* Auth Buttons */}
+                    {!isLoggedIn && (
                     <div className="flex items-center space-x-4">
                         <Link to="/login" className="text-[#8892b0] hover:text-[#ff2e6a] transition-colors duration-300 text-sm font-medium">
                             Login
@@ -73,6 +90,18 @@ const Navbar = () => {
                             </div>
                         </Link>
                     </div>
+                    )}
+                    {isLoggedIn && (
+                        <div className="flex items-center space-x-4">
+                    
+                        <Link onClick={LogoutHandle} className="relative group">
+                            <div className="absolute -inset-0.5 bg-gradient-to-r from-[#ff2e6a] to-[#3399ff] rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+                            <div className="relative px-4 py-2 bg-[#1a2236] rounded-lg text-white text-sm font-medium group-hover:bg-[#242f4d] transition duration-300">
+                                Log Out
+                            </div>
+                        </Link>
+                    </div>
+                    )}
                 </div>
             </div>
         </nav>

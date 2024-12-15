@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useMeeting, useParticipant } from '@videosdk.live/react-sdk';
+import { meetingService } from '../services/api';
+import { AuthContext } from '../store/AuthContextProvider';
 
-function Controls() {
+function Controls({meetingTitle,meetingId,participants,elapsedTime}) {
     const{toggleMic,toggleWebcam,toggleScreenShare,leave}=useMeeting();
+    const {isLoggedIn}=useContext(AuthContext);
 
     const handleToggleWebcam = () => {
       // Toggling webcam
@@ -13,6 +16,31 @@ function Controls() {
     }
     const handleScreenShare=()=>{
       toggleScreenShare();
+    }
+    const handleLeave=async()=>{
+      if(!isLoggedIn){
+        leave();
+        return;
+      }
+      
+      const userId=JSON.parse(localStorage.getItem('user')).id;
+      const meetingData={
+        meetingId:meetingId,
+        title:meetingTitle,
+        date:new Date(),
+        participants:participants,
+        duration:elapsedTime,
+        status:"completed"
+      }
+      try{
+        const response=await meetingService.createMeeting(userId,meetingData);
+        if(response){
+          console.log("Meeting registered successfully");
+        }
+      }catch(err){
+        console.log(err);
+      }
+      leave();
     }
     
   
@@ -72,7 +100,7 @@ function Controls() {
       <div className="relative group transform hover:scale-105 transition-all duration-300">
         <div className="absolute -inset-1 bg-gradient-to-r from-[#ff2e6a] to-[#ff2e6a] rounded-2xl opacity-30 group-hover:opacity-100 blur-lg transition-all duration-300"></div>
         <button 
-          onClick={leave}
+          onClick={handleLeave}
           className="relative px-8 py-4 bg-[#0f1729] rounded-2xl backdrop-blur-xl border border-white/10 group-hover:bg-[#1d1f33]/50"
         >
           <div className="flex items-center space-x-3">
