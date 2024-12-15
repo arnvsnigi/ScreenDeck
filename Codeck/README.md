@@ -1,5 +1,5 @@
 
-# Aransh - Modern Web Conferencing Platform
+# ScreenDeck - Modern Web Conferencing Platform
 
 A sophisticated web conferencing application built with React, featuring a modern-retro design aesthetic and powered by VideoSDK.
 
